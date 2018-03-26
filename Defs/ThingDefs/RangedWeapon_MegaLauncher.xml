@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+<ThingDef ParentName="BaseBullet">
+	<defName>MegaLauncher_Bullet</defName>
+	<label>megalauncher rocket</label>
+		<graphicData>
+			<texPath>Things/Projectile/Rocket_Big</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<thingClass>Projectile_Explosive</thingClass>
+		<projectile>
+			<damageDef>Bomb</damageDef>
+			<damageAmountBase>60</damageAmountBase>
+			<explosionRadius>6.0</explosionRadius>
+			<speed>60</speed>
+		</projectile>
+</ThingDef>
+
+<ThingDef ParentName="BaseHumanMakeableGun">
+	<defName>MegaLauncher</defName>
+	<label>mega launcher</label>
+	<description>A devastating rocket launcher with a wide area of destruction.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponRanged/DoomsdayLauncher</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <WorkToMake>50000</WorkToMake>
+      <Mass>7</Mass>
+	  <MarketValue>9001</MarketValue>
+      <AccuracyTouch>0.99</AccuracyTouch>
+      <AccuracyShort>0.92</AccuracyShort>
+      <AccuracyMedium>0.82</AccuracyMedium>
+      <AccuracyLong>0.72</AccuracyLong>
+      <RangedWeapon_Cooldown>9</RangedWeapon_Cooldown>
+      <Weapon_Bulk>1.8</Weapon_Bulk>
+    </statBases>
+	<recipeMaker>
+		<researchPrerequisite>ChargedShot</researchPrerequisite>
+	</recipeMaker>
+    <costList>
+      <Steel>300</Steel>
+      <Component>20</Component>
+	  <Plasteel>80</Plasteel>
+    </costList>
+	<techLevel>Spacer</techLevel>
+	<weaponTags>
+      <li>AdvancedGun</li>
+    </weaponTags>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>MegaLauncher_Bullet</defaultProjectile>
+        <warmupTime>3.5</warmupTime>
+		<ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+        <range>50</range>
+        <soundCast>InfernoCannon_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+		<targetParams>
+			<canTargetLocations>True</canTargetLocations>
+		</targetParams>
+        <muzzleFlashScale>12</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>10</power>
+        <cooldownTime>1.9</cooldownTime>
+      </li>
+    </tools>
+</ThingDef>
+
+<!-- ========== BASES ========== -->
+
+	<ThingDef Name="BaseGun" Abstract="True" ParentName="BaseWeapon">
+			<techLevel>Spacer</techLevel>
+		<smeltable>false</smeltable>
+		<thingCategories>
+      <li>WeaponsRanged</li>
+    </thingCategories>
+    <inspectorTabs>
+      <li>ITab_Art</li>
+    </inspectorTabs>
+    <comps>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+      <li Class="CompProperties_Art">
+        <nameMaker>ArtName_WeaponGun</nameMaker>
+        <descriptionMaker>ArtDescription_WeaponGun</descriptionMaker>
+        <minQualityForArtistic>Excellent</minQualityForArtistic>
+      </li>
+    </comps>
+	</ThingDef>
+	
+	<ThingDef Name="BaseMakeableGun" ParentName="BaseGun" Abstract="True">
+		<recipeMaker>
+      <workSpeedStat>SmithingSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Smith</effectWorking>
+      <soundWorking>Recipe_Smith</soundWorking>
+      <recipeUsers>
+        <li>TableMachining</li>
+      </recipeUsers>
+      <unfinishedThingDef>UnfinishedGun</unfinishedThingDef>
+      <researchPrerequisite>Gunsmithing</researchPrerequisite>
+    </recipeMaker>
+	</ThingDef>
+	
+	 <ThingDef Name="BaseHumanMakeableGun" ParentName="BaseMakeableGun" Abstract="True">
+    <weaponTags>
+      <li>AdvancedGun</li>
+    </weaponTags>
+  </ThingDef>
+
+  <ThingDef Name="BaseBullet" Abstract="True">
+    <category>Projectile</category>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <thingClass>Bullet</thingClass>
+    <label>bullet</label>
+    <useHitPoints>False</useHitPoints>
+    <neverMultiSelect>True</neverMultiSelect>
+    <graphicData>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+  </ThingDef>
+	
+</Defs>
